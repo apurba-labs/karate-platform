@@ -1,0 +1,55 @@
+node_modules\n.env
+
+/generated/prisma
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+
+# Runtime data
+*.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+.cache/
+out/
+
+# Prisma
+prisma/.env
+prisma/migrations/
+.prisma/client/
+prisma/*
+# IDEs / Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+*.dockerfile
+*.env.docker
+
+# Frontend specific
+node_modules/
+.vite/
+*.log
+*.lock
