@@ -1,73 +1,5 @@
 import React from 'react';
-
-const liveMatches = [
-  {
-    ring: 'Ring A',
-    fighter1: 'Ayan Singh',
-    fighter2: 'Karim Hasan',
-    score1: 3,
-    score2: 2,
-    status: 'LIVE'
-  },
-  {
-    ring: 'Ring B',
-    fighter1: 'John Smith',
-    fighter2: 'Tanaka Kenji',
-    score1: 1,
-    score2: 4,
-    status: 'LIVE'
-  },
-  {
-    ring: 'Ring C',
-    fighter1: 'Rahim Ahmed',
-    fighter2: 'David Lee',
-    score1: 2,
-    score2: 2,
-    status: 'LIVE'
-  }
-];
-
-const upcomingMatches = [
-  {
-    time: '09:30 AM',
-    ring: 'Ring A',
-    fighter1: 'Sakib Rahman',
-    fighter2: 'Ali Khan'
-  },
-  {
-    time: '10:00 AM',
-    ring: 'Ring B',
-    fighter1: 'Ayan Singh',
-    fighter2: 'Michael Chen'
-  },
-  {
-    time: '10:15 AM',
-    ring: 'Ring C',
-    fighter1: 'John Doe',
-    fighter2: 'Hasan Karim'
-  }
-];
-
-const leaderboard = [
-  {
-    dojo: 'ABC Martial Arts Academy',
-    gold: 5,
-    silver: 3,
-    bronze: 2
-  },
-  {
-    dojo: 'Dragon Karate Club',
-    gold: 4,
-    silver: 4,
-    bronze: 3
-  },
-  {
-    dojo: 'Tiger Dojo',
-    gold: 3,
-    silver: 2,
-    bronze: 5
-  }
-];
+import { tournamentData, liveMatches, upcomingMatches, leaderboard } from "@/data/tournamentData";
 
 const TournamentDashboard: React.FC = () => {
   return (
@@ -75,13 +7,22 @@ const TournamentDashboard: React.FC = () => {
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-red-600 to-orange-500 text-white py-12 px-8">
-        <h1 className="text-5xl font-bold mb-4">
-          🥋 National Karate Championship 2026
-        </h1>
+        
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold font-bold">
+                🥋 National Karate Championship 2026
+            </h1>
+
+            <span className="animate-pulse bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">
+                HUGE LIVE
+            </span>
+        </div>
+        
 
         <p className="text-xl opacity-90">
           Follow every match, score, and bracket in real time.
         </p>
+        
       </section>
 
       {/* Stats */}
@@ -89,22 +30,22 @@ const TournamentDashboard: React.FC = () => {
 
         <div className="bg-white rounded-xl p-6 shadow">
           <h3 className="text-gray-500">Participants</h3>
-          <p className="text-4xl font-bold">320</p>
+          <p className="text-4xl font-bold">{tournamentData.participants}</p>
         </div>
 
         <div className="bg-white rounded-xl p-6 shadow">
           <h3 className="text-gray-500">Dojos</h3>
-          <p className="text-4xl font-bold">42</p>
+          <p className="text-4xl font-bold">{tournamentData.dojos}</p>
         </div>
 
         <div className="bg-white rounded-xl p-6 shadow">
           <h3 className="text-gray-500">Active Rings</h3>
-          <p className="text-4xl font-bold">8</p>
+          <p className="text-4xl font-bold">{tournamentData.activeRings}</p>
         </div>
 
         <div className="bg-white rounded-xl p-6 shadow">
           <h3 className="text-gray-500">Matches Today</h3>
-          <p className="text-4xl font-bold">156</p>
+          <p className="text-4xl font-bold">{tournamentData.matchesToday}</p>
         </div>
 
       </section>
