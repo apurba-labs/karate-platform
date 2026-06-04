@@ -1,95 +1,170 @@
 import React from 'react';
-import { tournamentData, liveMatches, upcomingMatches, leaderboard } from "@/data/tournamentData";
+import { 
+    tournamentData, 
+    liveMatches, 
+    upcomingMatches, 
+    leaderboard, 
+    featuredMatch
+} from "@/data/tournamentData";
 
 const TournamentDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-red-600 to-orange-500 text-white py-12 px-8">
-        
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-            <h1 className="text-4xl md:text-5xl font-bold font-bold">
-                🥋 National Karate Championship 2026
-            </h1>
+        {/* Hero */}
+        <section className="bg-gradient-to-r from-red-600 to-orange-500 text-white py-12 px-8">
+            
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold font-bold">
+                    🥋 National Karate Championship 2026
+                </h1>
 
-            <span className="animate-pulse bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">
-                HUGE LIVE
-            </span>
-        </div>
-        
-
-        <p className="text-xl opacity-90">
-          Follow every match, score, and bracket in real time.
-        </p>
-        
-      </section>
-
-      {/* Stats */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 p-8">
-
-        <div className="bg-white rounded-xl p-6 shadow">
-          <h3 className="text-gray-500">Participants</h3>
-          <p className="text-4xl font-bold">{tournamentData.participants}</p>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow">
-          <h3 className="text-gray-500">Dojos</h3>
-          <p className="text-4xl font-bold">{tournamentData.dojos}</p>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow">
-          <h3 className="text-gray-500">Active Rings</h3>
-          <p className="text-4xl font-bold">{tournamentData.activeRings}</p>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow">
-          <h3 className="text-gray-500">Matches Today</h3>
-          <p className="text-4xl font-bold">{tournamentData.matchesToday}</p>
-        </div>
-
-      </section>
-
-      {/* Live Matches */}
-      <section className="px-8 pb-8">
-        <h2 className="text-3xl font-bold mb-6">
-          🔴 Live Matches
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {liveMatches.map((match, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl p-6 shadow border-l-4 border-red-500"
-            >
-              <div className="flex justify-between mb-4">
-                <span className="font-bold">{match.ring}</span>
-                <span className="text-red-500 font-bold">
-                  {match.status}
+                <span className="animate-pulse bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">
+                    HUGE LIVE
                 </span>
-              </div>
-
-              <div className="space-y-3">
-
-                <div className="flex justify-between">
-                  <span>{match.fighter1}</span>
-                  <span className="font-bold text-2xl">
-                    {match.score1}
-                  </span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span>{match.fighter2}</span>
-                  <span className="font-bold text-2xl">
-                    {match.score2}
-                  </span>
-                </div>
-
-              </div>
             </div>
-          ))}
-        </div>
-      </section>
+            
+
+            <p className="text-xl opacity-90">
+                Follow every match, score, and bracket in real time.
+            </p>
+            
+        </section>
+
+        {/* Stats */}
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-6 p-8">
+
+            <div className="bg-white rounded-xl p-6 shadow">
+                <h3 className="text-gray-500">Participants</h3>
+                <p className="text-4xl font-bold">{tournamentData.participants}</p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow">
+                <h3 className="text-gray-500">Dojos</h3>
+                <p className="text-4xl font-bold">{tournamentData.dojos}</p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow">
+                <h3 className="text-gray-500">Active Rings</h3>
+                <p className="text-4xl font-bold">{tournamentData.activeRings}</p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow">
+                <h3 className="text-gray-500">Matches Today</h3>
+                <p className="text-4xl font-bold">{tournamentData.matchesToday}</p>
+            </div>
+
+        </section>
+
+        {/* Featured Live Match */}
+        <section className="bg-gradient-to-r from-red-600 to-orange-500 text-white py-10 px-8">
+
+            <div className="flex items-center gap-3 mb-6">
+                <span className="px-3 py-1 rounded-full bg-red-500 animate-pulse text-sm font-bold">
+                    🔴 LIVE NOW
+                </span>
+
+                <span className="text-sm font-medium opacity-90">
+                    {featuredMatch.ring} • {featuredMatch.stage}
+                </span>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 items-center">
+
+                {/* Fighter 1 */}
+                <div className="text-center">
+                    <div className="w-28 h-28 rounded-full border-4 border-white overflow-hidden mx-auto mb-4 flex items-center justify-center">
+                        <img
+                            src={featuredMatch.fighter1.image}
+                            alt={featuredMatch.fighter1.name}
+                            className="w-full h-full object-cover"
+                            style={{ objectPosition: '50% 0%' }}
+                        />
+                    </div>
+                    <h3 className="text-2xl font-bold">
+                        {featuredMatch.fighter1.name}
+                    </h3>
+                    <p className="text-white/80 text-sm">
+                        {featuredMatch.fighter1.dojo}
+                    </p>
+                </div>
+
+                {/* Score */}
+                <div className="text-center">
+                    <h1 className="text-6xl font-extrabold">
+                        {featuredMatch.fighter1.score}
+                        <span className="mx-4 text-white/60">VS</span>
+                        {featuredMatch.fighter2.score}
+                    </h1>
+
+                    <p className="mt-4 text-lg">
+                        ⏱ {featuredMatch.timeRemaining} Remaining
+                    </p>
+                </div>
+
+                {/* Fighter 2 */}
+                <div className="text-center">
+                    <div className="w-28 h-28 rounded-full border-4 border-white overflow-hidden mx-auto mb-4 flex items-center justify-center">
+                        <img
+                            src={featuredMatch.fighter2.image}
+                            alt={featuredMatch.fighter2.name}
+                            className="w-full h-full object-cover"
+                            style={{ objectPosition: '50% 0%' }}
+                        />
+                    </div>
+
+                <h3 className="text-2xl font-bold">
+                    {featuredMatch.fighter2.name}
+                </h3>
+
+                <p className="text-white/80 text-sm">
+                    {featuredMatch.fighter2.dojo}
+                </p>
+                </div>
+
+            </div>
+        </section>
+
+        {/* Live Matches */}
+        <section className="px-8 pb-8">
+            <h2 className="text-3xl font-bold mb-6">
+                🔴 Live Matches
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-6">
+            {liveMatches.map((match, index) => (
+                <div
+                key={index}
+                className="bg-white rounded-xl p-6 shadow border-l-4 border-red-500"
+                >
+                    <div className="flex justify-between mb-4">
+                        <span className="font-bold">{match.ring}</span>
+                        <span className="text-red-500 font-bold">
+                        {match.status}
+                        </span>
+                    </div>
+
+                    <div className="space-y-3">
+
+                        <div className="flex justify-between">
+                        <span>{match.fighter1}</span>
+                        <span className="font-bold text-2xl">
+                            {match.score1}
+                        </span>
+                        </div>
+
+                        <div className="flex justify-between">
+                        <span>{match.fighter2}</span>
+                        <span className="font-bold text-2xl">
+                            {match.score2}
+                        </span>
+                        </div>
+
+                    </div>
+                </div>
+            ))}
+            </div>
+        </section>
 
       {/* Upcoming Matches */}
       <section className="px-8 pb-8">

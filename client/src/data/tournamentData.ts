@@ -9,24 +9,24 @@ export const tournamentData = {
 export const liveMatches = [
   {
     ring: "Ring A",
-    fighter1: "Ayan Singh",
-    fighter2: "Karim Hasan",
+    fighter1: "Aradhya Singh",
+    fighter2: "Fayaj Bin Insal Adib",
     score1: 3,
     score2: 2,
     status: "LIVE",
   },
   {
     ring: "Ring B",
-    fighter1: "John Smith",
-    fighter2: "Tanaka Kenji",
+    fighter1: "Nubaid Al Musnad",
+    fighter2: "Ayman Safeer",
     score1: 1,
     score2: 4,
     status: "LIVE",
   },
   {
     ring: "Ring C",
-    fighter1: "Rahim Ahmed",
-    fighter2: "David Lee",
+    fighter1: "Khandoker Ayan Farzed",
+    fighter2: "Sadaqat Alamgir Afnan",
     score1: 2,
     score2: 2,
     status: "LIVE",
@@ -37,14 +37,14 @@ export const upcomingMatches = [
   {
     time: "09:30 AM",
     ring: "Ring A",
-    fighter1: "Sakib Rahman",
-    fighter2: "Ali Khan",
+    fighter1: "Mahdi Al Mubassir",
+    fighter2: "Nooraz Zaharn Tasif",
   },
   {
     time: "10:00 AM",
     ring: "Ring B",
-    fighter1: "Ayan Singh",
-    fighter2: "Michael Chen",
+    fighter1: "Maryyam Zaman Nuba",
+    fighter2: "Tayeeba",
   },
 ];
 
@@ -62,3 +62,22 @@ export const leaderboard = [
     bronze: 3,
   },
 ];
+
+export const featuredMatch = {
+  ring: "Ring A",
+  stage: "Semi Final",
+  fighter1: {
+    name: "Aradhya Singh",
+    dojo: "ABC Martial Arts Academy",
+    image: "/images/athletes/aradhya.jpg",
+    score: 3,
+  },
+  fighter2: {
+    name: "Safwan Abdullah Izan",
+    dojo: "Dragon Karate Club",
+    image: "/images/athletes/izan.jpg",
+    score: 2,
+  },
+  timeRemaining: "00:48",
+  status: "LIVE",
+};
