@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import '@/styles/components/AddStudentForm.css';
+import { useNavigate, Link } from 'react-router-dom';
 import { useApi } from '@/hooks/useApi';
+import { useDojo } from '@/contexts/DojoContext';
 
+import '@/styles/components/AddStudentForm.css';
 
 interface RegisterData {
   // User fields
@@ -27,10 +28,17 @@ interface RegisterData {
 }
 
 const AddStudentForm: React.FC = () => {
-  const { dojoId } = useParams();
+  const { currentDojo, isLoading, error: dojoError, refetchDojo } = useDojo();
   const navigate = useNavigate();
   const api = useApi<any>();
-  
+
+  // Redirect if no dojo found
+  React.useEffect(() => {
+    if (!isLoading && !currentDojo) {
+      navigate('/dashboard');
+    }
+  }, [currentDojo, isLoading, navigate]);
+
   const [formData, setFormData] = useState<RegisterData>({
     username: '',
     email: '',
@@ -40,18 +48,28 @@ const AddStudentForm: React.FC = () => {
     lastName: '',
     dob: '',
     role: 'ATHLETE',
-    dojoId: undefined,
+    dojoId: currentDojo?.id,
     inviteCode: '',
-    since:'',
+    since: '',
     internalBeltRank: 'White Belt',
     dateOfJoining: new Date().toISOString().split('T')[0],
     emergencyContact: '',
     notes: ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Update formData when currentDojo is available
+  React.useEffect(() => {
+    if (currentDojo) {
+      setFormData(prev => ({
+        ...prev,
+        dojoId: currentDojo.id
+      }));
+    }
+  }, [currentDojo]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -63,7 +81,14 @@ const AddStudentForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
+    setSubmitError(null);
+
+    // Validate dojoId is present
+    if (!currentDojo?.id) {
+      setSubmitError('No dojo selected. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
 
@@ -76,30 +101,56 @@ const AddStudentForm: React.FC = () => {
         email: formData.email || undefined,
         phone: formData.phone || undefined,
         dob: formData.dob || undefined,
-        dojoId: formData.dojoId ?? undefined,
-        inviteCode: formData.inviteCode || undefined,
-        since: formData.since || undefined,
-        internalBeltRank: formData.internalBeltRank || 'White Belt',
-        dateOfJoining: new Date().toISOString().split('T')[0],
-        emergencyContact: formData.emergencyContact || undefined,
-        notes: formData.notes || undefined,
-
       };
-    
-      const result = await api.callApi('/auth/register', {
+
+      console.log('Creating user with data:', userData);
+
+      const userResult  = await api.callApi('/auth/register', {
         method: 'POST',
         body: JSON.stringify(userData),
       });
 
-      if (result.ok) {
-          console.log('Student created successfully:', result);
-          navigate('/dojos/manage/students'); 
-      } else {
-        setError('Failed to create student');
+      if (!userResult.ok) {
+        const errorData = await userResult.data;
+        throw new Error(errorData?.message || 'Failed to add user account');
       }
+
+      const newUser = await userResult.data;
+      console.log('User created successfully:', newUser);
+
+      // Add the user to the dojo as a member
+
+      const now = new Date().toISOString();
+      const dateOfJoining = formData.dateOfJoining ? new Date(formData.dateOfJoining).toISOString(): now;
+      const dojoMemberData = {
+        userId: newUser.user.id,
+        dojoId: currentDojo.id,
+        role: 'STUDENT',
+        since: new Date().toISOString(),
+        dateOfJoining: dateOfJoining,
+        isPrimary: true,
+        internalBeltRank: formData.internalBeltRank || 'White Belt',
+        emergencyContact: formData.emergencyContact || undefined,
+        notes: formData.notes || undefined,
+        parentId: formData.parentId || undefined,
+      };
+      console.log('Adding to dojo with data:', dojoMemberData);
+      const dojoMemberResult = await api.callApi('/dojos/add-member', {
+          method: 'POST',
+          body: JSON.stringify(dojoMemberData),
+      });
+
+      if (!dojoMemberResult.ok) {
+        const errorData = await dojoMemberResult.data;
+        throw new Error(errorData?.message || 'Failed to add student to dojo');
+      }
+
+      console.log('Student added to dojo successfully');
+      navigate(`/dojos/manage/students`); 
+      
     } catch (error) {
       console.error('Error creating student:', error);
-      setError('An error occurred while creating the student');
+      setSubmitError(error instanceof Error ? error.message : 'An error occurred while creating the student');
     } finally {
       setIsSubmitting(false);
     }
@@ -116,17 +167,42 @@ const AddStudentForm: React.FC = () => {
     'Black Belt'
   ];
 
+  if (isLoading) {
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+        <p>Loading dojo information...</p>
+      </div>
+    );
+  }
+
+  if (dojoError || !currentDojo) {
+    return (
+      <div className="dojo-management-error">
+        <div className="error-icon">⚠️</div>
+        <h3>Dojo Not Found</h3>
+        <p>{dojoError || 'You need to create a dojo first'}</p>
+        <button onClick={refetchDojo} className="btn btn-primary">
+          Try Again
+        </button>
+        <Link to="/dashboard" className="btn btn-outline">
+          Back to Dashboard
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="add-student-form">
       <div className="form-header">
         <h1>Add New Student</h1>
-        <p>Create a new student account and add them to your dojo</p>
+        <p>Create a new student account and add them to {currentDojo.name}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="student-form">
-        {error && (
+        {submitError && (
           <div className="error-message">
-            {error}
+            {submitError}
           </div>
         )}
 
@@ -228,6 +304,9 @@ const AddStudentForm: React.FC = () => {
           {/* Dojo Information */}
           <div className="form-section">
             <h3>🥋 Dojo Information</h3>
+            <div className="dojo-info-banner">
+              <strong>Dojo:</strong> {currentDojo.name} - {currentDojo.city}, {currentDojo.country}
+            </div>
             <div className="form-grid">
               <div className="form-group">
                 <label htmlFor="internalBeltRank">Current Belt Rank</label>
@@ -284,7 +363,7 @@ const AddStudentForm: React.FC = () => {
         <div className="form-actions">
           <button
             type="button"
-            onClick={() => navigate(`/dojos/${dojoId}/manage/students`)}
+            onClick={() => navigate(`/dojos/manage/students`)}
             className="btn btn-outline"
             disabled={isSubmitting}
           >

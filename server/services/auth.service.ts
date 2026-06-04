@@ -28,6 +28,9 @@ export class AuthService {
     async getUserByEmail(email: string) {
         return this.authRepo.getUserByEmail(email);
     }
+    async getUserByPhone(email: string) {
+        return this.authRepo.getUserByPhone(email);
+    }
     // Register a new user
     async registerUser(data: RegisterWithDojo) {
       const username = String(data.username ?? '').trim();

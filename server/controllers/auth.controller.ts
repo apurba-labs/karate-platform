@@ -39,6 +39,7 @@ export const register = async (req: Request, res: Response) => {
 
         const usernameStr = String(username ?? '').trim();
         const passwordStr = String(password ?? '');
+        const phoneStr = String(phone ?? '');
 
         if (!usernameStr) {
             return res.status(400).json({ error: 'Username is required' });
@@ -68,6 +69,13 @@ export const register = async (req: Request, res: Response) => {
           }
         }
 
+        if (phoneStr) {
+          const existingByPhone = await authService.getUserByPhone(phoneStr);
+          if (existingByPhone) {
+            return res.status(400).json({ message: 'Phone already in use' });
+          }
+        }
+
         const userData: any = {
           username: usernameStr,
           password: passwordStr,
@@ -75,7 +83,7 @@ export const register = async (req: Request, res: Response) => {
           lastName,
           dob,
           role,
-          phone,
+          phone:phoneStr,
           country,
           bio,
           dojoId, 

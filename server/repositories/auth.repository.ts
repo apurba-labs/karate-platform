@@ -26,6 +26,14 @@ export class AuthRepository {
             where: { email } 
         });
     }
+    async getUserByPhone(phone: string) {
+        if (!phone) {
+            throw new Error('Phone is required');
+        }
+        return prisma.user.findUnique({ 
+            where: { phone } 
+        });
+    }
 
 async buildDojoRelation(data: RegisterWithDojo) {
     if (!data.dojoId) return undefined;

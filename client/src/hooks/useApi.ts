@@ -40,7 +40,8 @@ export const useApi = <T>() => {
       console.log('API call to:', url, 'with options:', options); // Debug log
       
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      
+      console.log('API Login User token:', token);
+
       const defaultOptions: RequestInit = {
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ export const useApi = <T>() => {
       console.log('API success response:', data); // Debug log
       
       setApiState({ ok: response.ok, data, loading: false, error: null });
-      return { data, ok: response.ok, status: response.status };
+      return { data, ok: response.ok, status: response.status, error: null };
     } catch (error: any) {
       console.error('API call failed:', error); // Debug log
       const errorMessage = error.message || 'An unexpected error occurred';

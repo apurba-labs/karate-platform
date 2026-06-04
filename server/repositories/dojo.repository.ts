@@ -37,7 +37,8 @@ export const dojoRepository = {
   joinDojo: (data: any) => prisma.dojoMembers.create({ data }),
   findMember: (dojoId: number, userId: number) =>
   prisma.dojoMembers.findFirst({
-    where: { dojoId, userId, isActiveInternal: true }
+    where: { dojoId, userId, isActiveInternal: true },
+    include: { dojo: true, user: true },
   }),
   findMembers: (dojoId: number) => prisma.dojoMembers.findMany({
     where: { dojoId, isActiveInternal: true },

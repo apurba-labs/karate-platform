@@ -17,7 +17,6 @@ const DojoManagementLayout: React.FC = () => {
     }
   }, [currentDojo, isLoading, navigate]);
 
-  console.log('management', currentDojo);
   const navigationItems = [
     {
       id: 'overview',

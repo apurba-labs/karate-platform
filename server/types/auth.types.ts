@@ -24,7 +24,7 @@ export interface User {
   lastName: string;
   role: Role;
   phone?: string | null;
-  dob?: string | null;
+  dob?: Date | null;
   country?: string | null;
   bio?: string | null;
 }

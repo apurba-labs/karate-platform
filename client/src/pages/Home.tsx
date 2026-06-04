@@ -10,11 +10,11 @@ import '@/styles/home.css'
 const Home: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const [featuredEvents, setFeaturedEvents] = useState<any[]>([]);
-  const [stats, setStats] = useState({
-    totalUsers: 1000,
-    totalDojos: 3,
-    totalEvents: 3,
-    activeMembers: 800
+  const [stats] = useState({
+    participants: 320,
+    dojos: 42,
+    activeRings: 8,
+    matchesToday: 156
   });
 // Dummy events
   const dummyEvents = [
@@ -142,48 +142,67 @@ const Home: React.FC = () => {
       <section className="stats-section">
         <div className="stats-grid">
           <div className="stat-item">
-            <span className="stat-number">{stats.totalUsers.toLocaleString()}</span>
-            <span className="stat-label">Registered Members</span>
+            <span className="stat-number">{stats.participants}</span>
+            <span className="stat-label">Participants</span>
           </div>
+
           <div className="stat-item">
-            <span className="stat-number">{stats.totalDojos.toLocaleString()}</span>
-            <span className="stat-label">Active Dojos</span>
+            <span className="stat-number">{stats.dojos}</span>
+            <span className="stat-label">Dojos</span>
           </div>
+
           <div className="stat-item">
-            <span className="stat-number">{stats.totalEvents.toLocaleString()}</span>
-            <span className="stat-label">Tournaments</span>
+            <span className="stat-number">{stats.activeRings}</span>
+            <span className="stat-label">Active Rings</span>
           </div>
+
           <div className="stat-item">
-            <span className="stat-number">{stats.activeMembers.toLocaleString()}</span>
-            <span className="stat-label">Active This Month</span>
+            <span className="stat-number">{stats.matchesToday}</span>
+            <span className="stat-label">Matches Today</span>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="features-section">
-        <h2 className="section-title">Why Choose Our Platform?</h2>
+        <h2 className="section-title">
+          Everything You Need During A Tournament
+        </h2>
+
         <div className="features-grid">
+
+          <div className="feature-card">
+            <div className="feature-icon">🥊</div>
+            <h3>Live Match Tracking</h3>
+            <p>
+              Follow active matches and scores in real time.
+            </p>
+          </div>
+
           <div className="feature-card">
             <div className="feature-icon">🏆</div>
-            <h3>Tournament Management</h3>
-            <p>Complete event organization with bracket generation, registration, and real-time scoring.</p>
+            <h3>Tournament Brackets</h3>
+            <p>
+              Visualize athlete progression throughout the competition.
+            </p>
           </div>
+
+          <div className="feature-card">
+            <div className="feature-icon">📅</div>
+            <h3>Competition Schedule</h3>
+            <p>
+              Know exactly when and where matches are happening.
+            </p>
+          </div>
+
           <div className="feature-card">
             <div className="feature-icon">📊</div>
-            <h3>Progress Tracking</h3>
-            <p>Monitor your development with detailed analytics, belt progression, and skill mastery.</p>
+            <h3>Real-Time Scoreboard</h3>
+            <p>
+              Keep parents, coaches, and athletes informed instantly.
+            </p>
           </div>
-          <div className="feature-card">
-            <div className="feature-icon">🌍</div>
-            <h3>Global Community</h3>
-            <p>Connect with dojos and athletes worldwide. Share knowledge and compete internationally.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">⚡</div>
-            <h3>Real-time Updates</h3>
-            <p>Live scoring, instant notifications, and up-to-date rankings and results.</p>
-          </div>
+
         </div>
       </section>
 

@@ -97,18 +97,38 @@ export const dojoController = {
 
     joinDojo: async (req: Request, res: Response) => {
         try {
-        const dojoId = parseInt(req.params.dojoId);
-        const membership = await dojoService.joinDojo({
-            dojoId,
-            userId: req.user.userId,
-            role: 'STUDENT',
-            since: new Date(),
-            dateOfJoining: new Date()
-        });
-        res.status(201).json(membership);
+            const { 
+                userId, 
+                dojoId, 
+                role, 
+                since, 
+                dateOfJoining, 
+                isPrimary,
+                internalBeltRank,
+                emergencyContact,
+                notes,
+                parentId 
+            } = req.body;
+            const membership = await dojoService.joinDojo({
+                userId, dojoId, role, since, dateOfJoining,
+                    isPrimary, internalBeltRank,emergencyContact,
+                    notes, parentId
+            });
+            res.status(201).json(membership);
         } catch (err) {
-        console.error('Join dojo error:', err);
-        res.status(500).json({ error: 'Internal server error' });
+            console.error('Join dojo error:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    findMember: async (req: Request, res: Response) => {
+        try {
+            const dojoId = parseInt(req.params.dojoId);
+            const userId = parseInt(req.params.memberId);
+            const members = await dojoService.findMember(dojoId, userId);
+            res.json(members);
+        } catch (err) {
+            console.error('Get members error:', err);
+            res.status(500).json({ error: 'Internal server error' });
         }
     },
 
