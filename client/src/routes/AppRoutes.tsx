@@ -10,6 +10,8 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import ProtectedRoute from '@/components/ui/ProtectedRoute';
 import DojoRoutes from './DojoRoutes';
 import TournamentDashboard from '@/pages/TournamentDashboard';
+import TournamentManagement from '@/pages/TournamentManagement';
+import TournamentBrackets from '@/pages/TournamentBrackets';
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -21,7 +23,9 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/tournament-dashboard" element={<TournamentDashboard />} />
+      <Route path="/live-tournament" element={<TournamentDashboard />} />
+      <Route path="/tournament-center" element={<TournamentManagement />} />
+      <Route path="/brackets" element={<TournamentBrackets />} />
       <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
       <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
       <Route path="/dashboard" element={

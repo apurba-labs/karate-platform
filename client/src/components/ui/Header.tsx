@@ -13,9 +13,18 @@ const Header: React.FC = () => {
       return (
         <>
           <Link to="/" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Home</Link>
-          <Link to="/events" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/events' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Events</Link>
-          <Link to="/dojos" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/dojos' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Dojos</Link>
-          <Link to="/rankings" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/rankings' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Rankings</Link>
+          <Link
+              to="/live-tournament"
+              className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${
+                location.pathname === '/live-tournament'
+                  ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500'
+                  : ''
+              }`}
+            >
+              🔴 Live Tournament
+          </Link>
+          <Link to="/tournament-center" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/tournament-center' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Management</Link>
+          <Link to="/brackets" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/brackets' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>Brackets</Link>
           <Link to="/about" className={`text-gray-700 hover:text-red-500 font-medium py-2 relative transition-all duration-300 ${location.pathname === '/about' ? 'text-red-500 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500' : ''}`}>About</Link>
         </>
       );
@@ -61,7 +70,16 @@ const Header: React.FC = () => {
         <div className="logo">
           <Link to="/" className="flex items-center no-underline text-gray-800 font-bold text-2xl">
             <img src="/images/logo.webp" alt="Karate Platform" className="h-10 mr-2" />
-            <span>Karate <span className="text-red-500">Platform</span></span>
+            <div>
+                <div className="font-semibold">
+                    <span>Karate <span className="text-red-500">Platform</span></span>
+                </div>
+
+                <div className="text-xs text-gray-500">
+                    Live Tournament Experience
+                </div>
+            </div>
+            
           </Link>
         </div>
 
@@ -78,10 +96,10 @@ const Header: React.FC = () => {
           ) : (
             <div className="auth-buttons flex gap-2">
               <Link to="/login" className="text-red-500 bg-transparent border border-red-500 hover:bg-red-500 hover:text-white font-medium text-center px-3 py-1.5 rounded transition-all duration-300 cursor-pointer text-sm">
-                Login
+                Sign In
               </Link>
               <Link to="/register" className="text-white bg-red-500 border border-red-500 hover:bg-red-600 font-medium text-center px-3 py-1.5 rounded transition-all duration-300 cursor-pointer text-sm">
-                Register
+                Get Started
               </Link>
             </div>
           )}
