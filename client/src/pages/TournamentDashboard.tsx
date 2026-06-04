@@ -4,7 +4,9 @@ import {
     liveMatches, 
     upcomingMatches, 
     leaderboard, 
-    featuredMatch
+    featuredMatch,
+    bracketPreview,
+    recentActivities
 } from "@/data/tournamentData";
 
 const TournamentDashboard: React.FC = () => {
@@ -166,62 +168,209 @@ const TournamentDashboard: React.FC = () => {
             </div>
         </section>
 
-      {/* Upcoming Matches */}
-      <section className="px-8 pb-8">
-        <h2 className="text-3xl font-bold mb-6">
-          📅 Upcoming Matches
-        </h2>
+        {/* Upcoming Matches */}
+        <section className="px-8 pb-8">
+            <h2 className="text-3xl font-bold mb-6">
+            📅 Upcoming Matches
+            </h2>
 
-        <div className="bg-white rounded-xl shadow overflow-hidden">
-          {upcomingMatches.map((match, index) => (
-            <div
-              key={index}
-              className="flex justify-between p-4 border-b"
-            >
-              <div>
-                <strong>{match.time}</strong>
-              </div>
+            <div className="bg-white rounded-xl shadow overflow-hidden">
+            {upcomingMatches.map((match, index) => (
+                <div
+                key={index}
+                className="flex justify-between p-4 border-b"
+                >
+                <div>
+                    <strong>{match.time}</strong>
+                </div>
 
-              <div>
-                {match.fighter1} vs {match.fighter2}
-              </div>
+                <div>
+                    {match.fighter1} vs {match.fighter2}
+                </div>
 
-              <div>{match.ring}</div>
+                <div>{match.ring}</div>
+                </div>
+            ))}
             </div>
-          ))}
-        </div>
-      </section>
+        </section>
 
-      {/* Medal Table */}
-      <section className="px-8 pb-12">
+        {/* Medal Table */}
+        <section className="px-8 pb-12">
+            <h2 className="text-3xl font-bold mb-6">
+            🏆 Leaderboard
+            </h2>
+
+            <div className="bg-white rounded-xl shadow overflow-hidden">
+            <table className="w-full">
+                <thead className="bg-gray-100">
+                <tr>
+                    <th className="text-left p-4">Dojo</th>
+                    <th>🥇</th>
+                    <th>🥈</th>
+                    <th>🥉</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {leaderboard.map((dojo, index) => (
+                    <tr key={index} className="border-t">
+                    <td className="p-4">{dojo.dojo}</td>
+                    <td className="text-center">{dojo.gold}</td>
+                    <td className="text-center">{dojo.silver}</td>
+                    <td className="text-center">{dojo.bronze}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+            </div>
+        </section>
+
+        {/* Bracket Preview */}
+        <section className="px-8 pb-12">
+            <h2 className="text-3xl font-bold mb-6">
+                🏆 Tournament Bracket Preview
+            </h2>
+
+            <div className="bg-white rounded-xl shadow p-8">
+
+                <div className="grid md:grid-cols-3 gap-8">
+
+                {/* Quarter Finals */}
+                <div>
+                    <h3 className="font-bold text-lg mb-4 text-center">
+                    Quarter Finals
+                    </h3>
+
+                    {bracketPreview.quarterFinals.map((match, index) => (
+                    <div
+                        key={index}
+                        className="border rounded-lg p-3 mb-4"
+                    >
+                        <div className="mb-2">
+                            <div className="font-semibold">
+                                {match.fighter1.name}
+                            </div>
+
+                            <div className="text-xs text-gray-500">
+                                {match.fighter1.dojo}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="font-semibold">
+                                {match.fighter2.name}
+                            </div>
+
+                            <div className="text-xs text-gray-500">
+                                {match.fighter2.dojo}
+                            </div>
+                        </div>
+
+                        <div className="mt-3 text-green-600 text-sm font-bold">
+                            🏆 Winner: {match.winner}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+
+                {/* Semi Finals */}
+                <div>
+                    <h3 className="font-bold text-lg mb-4 text-center">
+                    Semi Finals
+                    </h3>
+
+                    {bracketPreview.semiFinals.map((match, index) => (
+                    <div
+                        key={index}
+                        className="border rounded-lg p-3 mb-4 bg-orange-50"
+                    >
+                        <div className="mb-2">
+                            <div className="font-semibold">
+                                {match.fighter1.name}
+                            </div>
+
+                            <div className="text-xs text-gray-500">
+                                {match.fighter1.dojo}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="font-semibold">
+                                {match.fighter2.name}
+                            </div>
+
+                            <div className="text-xs text-gray-500">
+                                {match.fighter2.dojo}
+                            </div>
+                        </div>
+
+                        <div className="mt-3 text-green-600 text-sm font-bold">
+                            🏆 Winner: {match.winner}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+
+                {/* Final */}
+                <div>
+                    <h3 className="font-bold text-lg mb-4 text-center">
+                    Final
+                    </h3>
+
+                    <div className="border-2 border-red-500 rounded-lg p-4 bg-red-50">
+
+                        <div className="mb-2">
+                            <div className="font-semibold">
+                                {bracketPreview.final.fighter1.name}
+                            </div>
+
+                            <div className="text-xs text-gray-500">
+                                {bracketPreview.final.fighter1.dojo}
+                            </div>
+                        </div>
+
+                        <div>
+                            TBD
+                        </div>
+
+                        <div className="mt-3 text-red-600 font-bold">
+                            Championship Match
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        {/* Recent Activity Feed */}
+        <section className="px-8 pb-12">
         <h2 className="text-3xl font-bold mb-6">
-          🏆 Leaderboard
+            ⚡ Recent Activity
         </h2>
 
         <div className="bg-white rounded-xl shadow overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="text-left p-4">Dojo</th>
-                <th>🥇</th>
-                <th>🥈</th>
-                <th>🥉</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {leaderboard.map((dojo, index) => (
-                <tr key={index} className="border-t">
-                  <td className="p-4">{dojo.dojo}</td>
-                  <td className="text-center">{dojo.gold}</td>
-                  <td className="text-center">{dojo.silver}</td>
-                  <td className="text-center">{dojo.bronze}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            {recentActivities.map((activity, index) => (
+            <div
+                key={index}
+                className="flex items-start gap-4 p-4 border-b last:border-b-0 hover:bg-gray-50"
+            >
+                <div className="text-sm text-gray-500 min-w-[90px]">
+                {activity.time}
+                </div>
+
+                <div className="flex-1">
+                <p className="text-gray-800">
+                    {activity.message}
+                </p>
+                </div>
+            </div>
+            ))}
+
         </div>
-      </section>
+        </section>
 
     </div>
   );
