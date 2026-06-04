@@ -3,7 +3,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { AuthProvider } from './contexts/AuthContext';
 import { DojoProvider } from '@/contexts/DojoContext';
 import Layout from './components/ui/Layout';
-import './App.css';
+
 
 const App: React.FC = () => {
   return (
