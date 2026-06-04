@@ -1,0 +1,383 @@
+/* Statistics Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 25px;
+  box-shadow: var(--box-shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary);
+  border: 1px solid var(--gray-200);
+  min-height: 140px;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
+  border-left-color: var(--primary-dark);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-content h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 5px 0;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-content p {
+  color: var(--gray-700);
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.stat-content small {
+  color: var(--gray-500);
+  font-size: 0.85rem;
+  display: block;
+}
+
+/* Dojo Management Section */
+.quick-actions {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+.quick-actions h3 {
+  color: var(--gray-900);
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--gray-200);
+  padding-bottom: 15px;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--border-radius-lg);
+  padding: 30px 20px;
+  text-decoration: none;
+  color: var(--gray-800);
+  transition: all 0.3s ease;
+  text-align: center;
+  min-height: 140px;
+}
+
+.action-btn:hover {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border-color: var(--primary);
+  text-decoration: none;
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
+}
+
+.action-btn .icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.action-btn:hover .icon {
+  transform: scale(1.1);
+}
+
+.action-btn span:last-child {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.section-header h3 {
+  color: var(--gray-900);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.coach-quick-info {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Recent Activity */
+.recent-activity {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 30px;
+  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stat-card {
+    padding: 20px;
+    min-height: auto;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .stat-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .stat-content h3 {
+    font-size: 2rem;
+  }
+  
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-btn {
+    padding: 25px 15px;
+    min-height: 120px;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .coach-quick-info {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-actions,
+  .recent-activity {
+    padding: 20px;
+  }
+  
+  .stat-card {
+    padding: 15px;
+  }
+  
+  .action-btn {
+    padding: 20px 15px;
+    min-height: 100px;
+  }
+  
+  .action-btn .icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+}
+
+/* Animation for stat cards */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card {
+  animation: slideInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+.stat-card:nth-child(5) { animation-delay: 0.5s; }
+.stat-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Gradient colors for different stat cards */
+.stat-card:nth-child(1) .stat-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.stat-card:nth-child(2) .stat-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.stat-card:nth-child(3) .stat-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.stat-card:nth-child(4) .stat-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.stat-card:nth-child(5) .stat-icon { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.stat-card:nth-child(6) .stat-icon { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+
+/* Ensure proper contrast for gradient text */
+.stat-content h3 {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Fix for when CreateDojoForm is shown */
+.coach-dashboard .dashboard-header {
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
+  padding: 40px 30px;
+  margin-bottom: 30px;
+}
+
+/* Ensure form doesn't break the header layout */
+.dashboard-header .header-cta {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.dashboard-header .header-cta .create-dojo {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.dashboard-header .header-cta .create-dojo h3 {
+  display: none; /* Hide duplicate heading */
+}
+
+/* Fix form styling within dashboard header */
+.dashboard-header .create-dojo form {
+  background: var(--white);
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--gray-200);
+  margin-top: 20px;
+}
+
+.dashboard-header .create-dojo form > div {
+  margin-bottom: 20px;
+}
+
+/* Ensure features grid doesn't break when form is shown */
+.dashboard-header .features-grid {
+  margin: 30px auto;
+}
+
+/* Mobile fixes for form in header */
+@media (max-width: 768px) {
+  .coach-dashboard .dashboard-header {
+    padding: 30px 20px;
+  }
+  
+  .dashboard-header .create-dojo form {
+    padding: 20px;
+    margin: 15px 0;
+  }
+  
+  .dashboard-header .features-grid {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .coach-dashboard .dashboard-header {
+    padding: 25px 15px;
+  }
+  
+  .dashboard-header .create-dojo form {
+    padding: 15px;
+  }
+}
+
+/* Fix z-index and overflow issues */
+.dashboard-header {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Ensure form elements don't break the gradient background */
+.dashboard-header .create-dojo input,
+.dashboard-header .create-dojo textarea,
+.dashboard-header .create-dojo button {
+  background: var(--white);
+}
+
+/* Animation fixes when form is present */
+.dashboard-header .feature-item {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
