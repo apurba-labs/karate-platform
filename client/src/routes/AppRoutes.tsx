@@ -12,6 +12,7 @@ import DojoRoutes from './DojoRoutes';
 import TournamentDashboard from '@/pages/TournamentDashboard';
 import TournamentManagement from '@/pages/TournamentManagement';
 import TournamentBrackets from '@/pages/TournamentBrackets';
+import LiveArenaScoreboard from '@/pages/LiveArenaScoreboard';
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -26,6 +27,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/live-tournament" element={<TournamentDashboard />} />
       <Route path="/tournament-center" element={<TournamentManagement />} />
       <Route path="/brackets" element={<TournamentBrackets />} />
+      <Route path="/live-match/:ringId" element={<LiveArenaScoreboard />}/>
       <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
       <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
       <Route path="/dashboard" element={

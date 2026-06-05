@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
     tournamentData, 
     liveMatches, 
@@ -141,27 +142,35 @@ const TournamentDashboard: React.FC = () => {
                 >
                     <div className="flex justify-between mb-4">
                         <span className="font-bold">{match.ring}</span>
-                        <span className="text-red-500 font-bold">
-                        {match.status}
+                        <span className="text-xs text-red-500 font-semibold animate-pulse">
+                            🔴 {match.status} NOW
                         </span>
                     </div>
 
                     <div className="space-y-3">
 
                         <div className="flex justify-between">
-                        <span>{match.fighter1}</span>
-                        <span className="font-bold text-2xl">
-                            {match.score1}
-                        </span>
+                            <span>{match.fighter1}</span>
+                            <span className="font-bold text-2xl">
+                                {match.score1}
+                            </span>
                         </div>
 
                         <div className="flex justify-between">
-                        <span>{match.fighter2}</span>
-                        <span className="font-bold text-2xl">
-                            {match.score2}
-                        </span>
+                            <span>{match.fighter2}</span>
+                            <span className="font-bold text-2xl">
+                                {match.score2}
+                            </span>
                         </div>
 
+                    </div>
+                    <div className="mt-5">
+                        <Link
+                            to={`/live-match/${match.ring.toLowerCase().replace(' ', '-')}`}
+                            className="w-full flex items-center justify-center gap-2 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300"
+                        >
+                            📺 Watch Live Arena
+                        </Link>
                     </div>
                 </div>
             ))}
