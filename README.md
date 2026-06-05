@@ -6,6 +6,14 @@ Karate Platform helps spectators, athletes, coaches, and organizers stay connect
 
 ---
 
+## 🎯 Project Vision
+
+Karate Platform aims to improve the tournament experience for spectators, athletes, coaches, and organizers by making live competition data more accessible and engaging.
+
+The long-term vision is a complete martial arts competition platform supporting tournament operations, athlete management, live scoring, and event broadcasting.
+
+---
+
 ## Features
 
 ### 🔴 Live Tournament Dashboard
@@ -52,27 +60,65 @@ Organizer-focused management dashboard.
 
 ---
 
-## Project Vision
+## 🌐 Live Demo
 
-The long-term vision is a complete tournament and dojo management platform for martial arts organizations, including athlete registration, competition management, rankings, examinations, and live event broadcasting.
+Experience the platform online:
+
+**Live Application:** https://karate-platform.vercel.app/
+
+Explore the complete tournament experience:
+
+* 🏠 Home Page
+* 🔴 Live Tournament Dashboard
+* 🥋 Live Match Arena
+* 🏆 Tournament Brackets
+* 🏢 Tournament Center
 
 ---
 
 ## 📦 Quick Start & Local Setup
 
-et the interactive arena dashboard up and running locally in under a minute:
+Get the tournament experience running locally in just a few minutes.
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/apurba-labs/karate-platform.git
 cd karate-platform
-npm install
-npm run dev:client
-
 ```
 
-Open your browser and navigate to http://localhost:5173 to experience the live arena scoreboard in action.
+### 2. Install Dependencies
+
+```bash
+npm install
+cd client
+npm install
+```
+
+### 3. Start the Frontend
+
+```bash
+cd ..
+npm run dev:client
+```
+
+### 4. Open the Application
+
+Visit:
+
+```text
+http://localhost:5173
+```
+
+and explore the Live Tournament Dashboard, Live Match Arena, Brackets, and Tournament Center.
+
+---
+
+## 🚀 Project Status
+
+This repository currently focuses on the tournament experience and spectator journey, demonstrating how parents, athletes, coaches, and organizers can stay connected during a martial arts competition.
+
+Future development will expand into real-time scoring, live streaming, athlete registration, dojo management, and full tournament operations.
 
 
 ---
@@ -84,43 +130,37 @@ Open your browser and navigate to http://localhost:5173 to experience the live a
 * React Router
 * Tailwind CSS
 
-## Current Status
-
-This repository represents a tournament experience prototype focused on solving the presentation and spectator experience of martial arts competitions.
-
-Future development will focus on:
-
-* Real-time WebSocket updates
-* Live streaming integration
-* Automated bracket generation
-* Athlete registration workflows
-* Multi-dojo support
-* SaaS platform capabilities
-
-
 ---
 
 ## Screenshots
 
 ### Home Page
 
-![Alt text](docs/home.png)
+![Home Page](docs/home.png)
 
 ### Live Tournament Dashboard
 
-![Alt text](docs/live_tournament_dashboard.png)
+![Live Tournament Dashboard](docs/live_tournament_dashboard.png)
 
 ### Live Arena
 
-![Alt text](docs/live_arena.png)
+![Live Arena](docs/live_arena.png)
 
 ### Tournament Center
 
-![Alt text](docs/tournament_center.png)
+![Tournament Center](docs/tournament_center.png)
 
 ### Brackets
 
-![Alt text](docs/brackets.png)
+![Brackets](docs/brackets.png)
+
+---
+
+## 🏆 Hackathon
+
+This project was refined and completed as part of the GitHub Finish-up-a-thon, focusing on solving the tournament presentation and spectator experience.
+
+---
 
 ## License
 
