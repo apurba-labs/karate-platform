@@ -69,7 +69,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-4">
         <div className="logo">
           <Link to="/" className="flex items-center no-underline text-gray-800 font-bold text-2xl">
-            <img src="/images/logo.webp" alt="Karate Platform" className="h-10 mr-2" />
+            <img src="/images/aradhya_logo.jpg" alt="Karate Platform" className="h-10 mr-2" />
             <div>
                 <div className="font-semibold">
                     <span>Karate <span className="text-red-500">Platform</span></span>
