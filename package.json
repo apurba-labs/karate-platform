@@ -8,7 +8,7 @@
     "build:server": "tsc",
     "start:server": "node dist/index.js",
     "dev:client": "cd client && npm run dev",
-    "build:client": "cd client && npm run build",
+    "build:client": "cd client && npm run build --prefix client",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "prisma:migrate": "prisma migrate dev",

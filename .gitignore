@@ -53,3 +53,4 @@ node_modules/
 .vite/
 *.log
 *.lock
+.vercel

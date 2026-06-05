@@ -63,8 +63,9 @@ The long-term vision is a complete tournament and dojo management platform for m
 et the interactive arena dashboard up and running locally in under a minute:
 
 ### 1. Clone the Repository
+
 ```bash
-git clone [https://github.com/apurba-labs/karate-platform.git](https://github.com/apurba-labs/karate-platform.git)
+git clone https://github.com/apurba-labs/karate-platform.git
 cd karate-platform
 npm install
 npm run dev:client
